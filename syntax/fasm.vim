@@ -173,6 +173,9 @@ syn match   fasmSymbol          "[()|\[\]:]"
 syn match   fasmSpecial         "[#?%$,]"
 syn match   fasmLabel           "^\s*[^; \t]\+:"
 
+" disable spell check
+contains=@NoSpell
+
 hi def link fasmAddressSizes    type
 hi def link fasmNumericOperator fasmOperator
 hi def link fasmLogicalOperator fasmOperator
@@ -190,8 +193,6 @@ hi def link fasmMacroDirective  fasmDirective
 hi def link fasmInstr           Keyword
 hi def link fasmRegister        Type
 hi def link fasmNumber          Constant
-hi def link fasmString          String
-hi def link fasmComment         Comment
 hi def link fasmOperator        Special
 hi def link fasmLabel           Underlined
 hi def link fasmSymbol          Structure
@@ -199,6 +200,13 @@ hi def link fasmSpecial         Special
 hi def link fasmMacros          Identifier
 hi def link fasmDirective       PreProc
 hi def link fasmDataDirectives  rubyDefine
+" enable spell check for comments
+hi def link fasmComment         Comment
+syntax region fasmComment start=";" end="$" contains=@Spell
+
+" enable spell check for strings
+hi def link fasmString          String
+syntax region fasmString start=";" end="$" contains=@Spell
 
 let b:current_syntax = "fasm"
 
